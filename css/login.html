@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IKIAE Login</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+      /* Root color scheme */
+      :root {
+        --bg-color: #d9cfc7;
+        --card-bg: #4a2f1a;
+        --input-bg: #fff;
+        --input-placeholder: #b7a696;
+        --btn-bg: #fff;
+        --btn-text: #4a2f1a;
+        --forgot-password-color: #e9e4dc;
+        --text-primary: #4a2f1a;
+        --social-google: #dd4b39;
+        --social-facebook: #4267b2;
+        --shadow-dark: rgba(0, 0, 0, 0.3);
+      }
+
+      /* Reset and base */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background-color: var(--bg-color);
+        font-family: "Open Sans", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Container card */
+      .login-card {
+        background-color: var(--card-bg);
+        width: 320px;
+        max-width: 90vw;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px var(--shadow-dark);
+        padding: 60px 32px 40px;
+        position: relative;
+        text-align: center;
+      }
+
+      /* Top oval logo */
+      .logo-oval {
+        position: absolute;
+        top: -36px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140px;
+        height: 60px;
+        background-color: #b99669;
+        border-radius: 50% / 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0 4px 8px rgb(255 255 255 / 0.3);
+      }
+
+      .logo-oval span {
+        color: var(--input-bg);
+        font-weight: 700;
+        font-size: 24px;
+        letter-spacing: 0.12em;
+        font-family: serif;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        user-select: none;
+      }
+
+      /* Decorative pattern inside oval (subtle) */
+      .logo-oval::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 12px;
+        right: 12px;
+        height: 4px;
+        background: repeating-radial-gradient(
+          circle at center,
+          rgba(255 255 255 / 0.1) 0 2px,
+          transparent 2px 6px
+        );
+        border-radius: 999px;
+        opacity: 0.2;
+        pointer-events: none;
+      }
+
+      /* Form inputs style */
+      .login-input {
+        display: flex;
+        align-items: center;
+        background: var(--input-bg);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: var(--card-bg);
+        box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.1);
+        border: none;
+        font-size: 15px;
+        gap: 10px;
+        outline-offset: 3px;
+        outline-color: transparent;
+        transition: outline-color 0.3s ease;
+      }
+      .login-input:focus-within {
+        outline-color: #bf8b55;
+        box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.15);
+      }
+
+      /* Icon style */
+      .login-input svg {
+        fill: var(--card-bg);
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Input fields */
+      .login-input input {
+        border: none;
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--card-bg);
+        flex-grow: 1;
+        background: transparent;
+        outline: none;
+        font-family: "Open Sans", sans-serif;
+        user-select: text;
+      }
+
+      /* Placeholder color */
+      .login-input input::placeholder {
+        color: var(--input-placeholder);
+        font-weight: 600;
+      }
+
+      /* Forgot password */
+      .forgot-password {
+        text-align: right;
+        margin-top: -14px;
+        margin-bottom: 22px;
+        font-size: 11px;
+        color: var(--forgot-password-color);
+        user-select: none;
+        cursor: pointer;
+        font-weight: 600;
+        text-shadow: 0 0 2px #3c2a14;
+        letter-spacing: 0.05em;
+      }
+      .forgot-password:hover {
+        text-decoration: underline;
+        color: #dcd4ca;
+      }
+
+      /* Login button */
+      .login-button {
+        width: 100%;
+        border: none;
+        border-radius: 24px;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        font-weight: 700;
+        font-size: 18px;
+        padding: 12px 0px;
+        cursor: pointer;
+        box-shadow: 0 7px 0 #b1824b, 0 0 10px rgb(255 255 255 / 0.2);
+        user-select: none;
+        transition: background-color 0.25s ease, box-shadow 0.25s ease;
+        text-shadow: 0 1px 0 #5a3e1e;
+      }
+      .login-button:active {
+        box-shadow: inset 0 4px 7px rgb(0 0 0 / 0.15);
+        background-color: #fefefe;
+        transform: translateY(2px);
+      }
+
+      /* Additional login methods area */
+      .login-other {
+        margin-top: 30px;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--text-primary);
+        user-select: none;
+      }
+
+      .login-other span {
+        display: inline-block;
+        margin: 0 10px;
+      }
+
+      /* Social buttons container */
+      .social-buttons {
+        margin-top: 12px;
+        display: flex;
+        justify-content: center;
+        gap: 23px;
+      }
+
+      /* Social button base style */
+      .social-btn {
+        cursor: pointer;
+        user-select: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        box-shadow: 0 3px 6px rgb(0 0 0 / 0.1),
+          inset 0 1px 0 rgb(255 255 255 / 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: box-shadow 0.3s ease;
+      }
+      .social-btn:hover {
+        box-shadow: 0 4px 10px rgb(0 0 0 / 0.18),
+          inset 0 1px 1px rgb(255 255 255 / 0.85);
+      }
+
+      /* Google button style */
+      .social-google {
+        background: var(--btn-bg);
+        border: 1.5px solid var(--social-google);
+      }
+      .social-google svg {
+        width: 22px;
+        height: 22px;
+        fill: var(--social-google);
+      }
+
+      /* Facebook button style */
+      .social-facebook {
+        background: var(--btn-bg);
+        border: 1.5px solid var(--social-facebook);
+      }
+      .social-facebook svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--social-facebook);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="login-card" role="main" aria-label="Login form">
+      <div class="logo-oval" aria-label="IKIAE Logo">
+        <span>IKIAE</span>
+      </div>
+
+      <form aria-describedby="login-instructions">
+        <label class="login-input" for="email">
+          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path
+              d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"
+            />
+          </svg>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="E-mail"
+            autocomplete="email"
+            required
+            aria-required="true"
+            aria-label="Email address"
+          />
+        </label>
+        <label class="login-input" for="password">
+          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path
+              d="M6 10v4h12v-4a6 6 0 0 0-12 0zm12 2h-2v2H8v-2H6a2 2 0 0 0-1 3.73V18a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2.27A2 2 0 0 0 18 12zM12 7a3 3 0 0 1 3 3v2H9v-2a3 3 0 0 1 3-3z"
+            />
+          </svg>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+            aria-required="true"
+            aria-label="Password"
+          />
+        </label>
+        <div
+          class="forgot-password"
+          tabindex="0"
+          role="button"
+          aria-label="Forgot password?"
+        >
+          Forgot password?
+        </div>
+
+        <button type="submit" class="login-button" aria-label="Login">
+          LOGIN
+        </button>
+      </form>
+
+      <p class="login-other" id="login-instructions">Masuk dengan</p>
+      <div
+        class="social-buttons"
+        role="group"
+        aria-label="Social media login options"
+      >
+        <div
+          class="social-btn social-google"
+          tabindex="0"
+          role="button"
+          aria-label="Login with Google"
+        >
+          <svg viewBox="0 0 533.5 544.3" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M533.5 278.4c0-18.1-1.5-35.1-4.3-51.8H272v98.1h146.9c-6.4 34.7-25.9 64.1-55.4 83.8l-0.5 3.6 80.5 62.5 5.6 0.6c51.3-47.3 80.4-117 80.4-196.8z"
+              fill="#4285f4"
+            />
+            <path
+              d="M272 544.3c73.4 0 135-24.3 180-65.7l-86.4-67.1c-23.4 15.8-53.2 25.1-93.6 25.1-71.8 0-132.7-48.3-154.5-113.7l-3.2 0.3-85 66 0.1 2.2c44.7 88 136.3 152.9 242.6 152.9z"
+              fill="#34a853"
+            />
+            <path
+              d="M117.5 322.9c-8.9-26.5-8.9-54.6 0-81.1l-0.1-2.5-84.8-65.8-2.9 1.4c-19.3 38.5-30.3 82.2-30.3 128.2 0 46 10.9 89.7 30.3 128.2l87.7-68.1z"
+              fill="#fbbc04"
+            />
+            <path
+              d="M272 107.3c39.8 0 75.6 13.7 103.7 40.7l77.6-76c-47-43.6-108.3-70.4-181.3-70.4-106.1 0-197.7 64.9-242.3 152.9l87.6 68c22-66.1 82.9-114 155.1-114z"
+              fill="#ea4335"
+            />
+          </svg>
+        </div>
+
+        <div
+          class="social-btn social-facebook"
+          tabindex="0"
+          role="button"
+          aria-label="Login with Facebook"
+        >
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M22.675 0h-21.35C.6 0 0 .6 0 1.325v21.351C0 23.4.6 24 1.325 24H12.8V14.708H9.692v-3.622h3.108v-2.678c0-3.067 1.873-4.74 4.61-4.74 1.312 0 2.438.098 2.767.142v3.21l-1.9.001c-1.49 0-1.776.71-1.776 1.748v2.292h3.55l-.463 3.622h-3.087V24h6.05c.726 0 1.326-.6 1.326-1.324V1.325C24 .599 23.4 0 22.675 0z"
+            />
+          </svg>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

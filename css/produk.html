@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dipan Kayu - Detail Produk</title>
+    <style>
+      /* Reset and base */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        background-color: #e5d9cc;
+        color: #382f2b;
+        padding: 20px 16px;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 420px;
+        width: 100%;
+        background: #f5efe7;
+        border-radius: 16px;
+        box-shadow: 2px 6px 15px rgb(0 0 0 / 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: #d5c5b2;
+        font-weight: 600;
+        font-size: 18px;
+        color: #3a2f2b;
+        user-select: none;
+      }
+
+      header .back-arrow {
+        display: inline-block;
+        margin-right: 12px;
+        font-size: 20px;
+        cursor: pointer;
+        user-select: none;
+        color: #3a2f2b;
+        font-weight: 700;
+        line-height: 0;
+      }
+
+      /* Image slider container */
+      .image-slider {
+        position: relative;
+        background-color: #f0e9e0;
+        padding: 24px 12px 12px 12px;
+        border-radius: 0 0 32px 32px;
+        box-shadow: inset 0 -8px 12px -10px #c5baae;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .image-slider img {
+        width: 100%;
+        max-width: 380px;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+        user-select: none;
+        pointer-events: none;
+      }
+
+      /* Detail Produk section */
+      .detail-section {
+        padding: 24px 24px 16px;
+        flex-grow: 1;
+      }
+
+      .detail-title {
+        font-weight: 700;
+        font-size: 20px;
+        margin-bottom: 18px;
+        color: #3a2f2b;
+      }
+
+      /* Detail product rows */
+      .detail-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 14px;
+        font-weight: 500;
+        font-size: 16px;
+        color: #4e4235;
+      }
+
+      .detail-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .label {
+        flex-shrink: 0;
+        max-width: 100px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #6b5a49;
+        font-weight: 600;
+      }
+
+      .value {
+        flex-grow: 1;
+        font-weight: 700;
+        text-align: right;
+        color: #3b2e25;
+      }
+
+      /* Icons in label */
+      .icon {
+        width: 18px;
+        height: 18px;
+        fill: #6b5a49;
+        flex-shrink: 0;
+      }
+
+      /* Divider line */
+      .divider {
+        border-top: 1px solid #c8bbaa;
+        margin: 24px 0 16px;
+      }
+
+      /* Harga section */
+      .price-section {
+        padding: 0 24px 16px;
+      }
+
+      .price-label {
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #3a302a;
+      }
+
+      .price-box {
+        border: 1.8px solid #b8a889;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-weight: 700;
+        font-size: 22px;
+        color: #4a3e34;
+        background: #f0e7d9;
+        user-select: none;
+      }
+
+      /* Variant selection */
+      .variant-section {
+        padding: 0 24px 28px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #5a4d42;
+      }
+
+      .variant-label {
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #423a33;
+      }
+
+      .variant-subtext {
+        margin-top: 4px;
+        font-weight: 400;
+        font-size: 13px;
+        color: #6e604f;
+        user-select: none;
+      }
+
+      .variant-options {
+        display: flex;
+        gap: 14px;
+        margin-top: 8px;
+      }
+
+      .variant-option {
+        flex-grow: 1;
+        text-align: center;
+        padding: 10px 0;
+        background-color: #ccc3aa;
+        border-radius: 12px;
+        cursor: pointer;
+        color: #453b2d;
+        font-weight: 600;
+        user-select: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .variant-option:hover {
+        background-color: #b8a783;
+        color: #342910;
+      }
+
+      .variant-option.selected {
+        background-color: #443a2c;
+        color: #f5eedc;
+        border-color: #f5eedc;
+        cursor: default;
+      }
+
+      /* Buttons container */
+      .buttons-container {
+        padding: 0 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      button {
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        padding: 14px 0;
+        cursor: pointer;
+        font-weight: 700;
+        user-select: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-cart {
+        background-color: #f0e7d0;
+        color: #473b2e;
+        box-shadow: inset 0 -3px 6px rgb(0 0 0 / 0.1);
+      }
+
+      .btn-cart:hover {
+        background-color: #dcd2b2;
+      }
+
+      .btn-checkout {
+        background-color: #1d1a17;
+        color: #f6f1e7;
+        box-shadow: 0 4px 15px rgb(0 0 0 / 0.25);
+      }
+
+      .btn-checkout:hover {
+        background-color: #2d2a27;
+      }
+
+      /* Accessibility focus */
+      button:focus-visible,
+      .variant-option:focus-visible {
+        outline: 3px solid #8c7a5e;
+        outline-offset: 2px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 440px) {
+        .container {
+          margin: 0 12px;
+        }
+        .price-box {
+          font-size: 20px;
+        }
+        .detail-title {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" role="main" aria-label="Detail produk dipan kayu">
+      <header>
+        <button
+          aria-label="Kembali"
+          class="back-arrow"
+          onclick="history.back()"
+          title="Kembali ke halaman sebelumnya"
+        >
+          &lsaquo;
+        </button>
+        Dipan Kayu
+      </header>
+
+      <section
+        class="image-slider"
+        aria-label="Gambar produk dipan kayu warna coklat muda"
+      >
+        <img
+          src="https://placehold.co/380x260?text=Dipan+Kayu+Coklat+Muda+di+Kamar+Minimalis"
+          alt="Dipan kayu warna coklat muda diletakkan di kamar tidur minimalis dengan lantai kayu dan lampu berdiri"
+          onerror="this.onerror=null;this.src='https://placehold.co/380x260?text=Gambar+tidak+tersedia';"
+          loading="lazy"
+        />
+      </section>
+
+      <section class="detail-section" aria-labelledby="detailProdukTitle">
+        <h2 id="detailProdukTitle" class="detail-title">Detail Produk</h2>
+
+        <div class="detail-row">
+          <span class="label" title="Ukuran produk">
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M3 17v2h18v-2H3zm0-10v2h18V7H3zm0 6v2h18v-2H3z" />
+            </svg>
+            Ukuran
+          </span>
+          <span class="value">180x200</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label" title="Bahan produk">
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M7 2l-5 9v11h12v-6h10V9l-5-7H7zM5 17h2v-4H5v4zm0-6h2v-2H5v2zm14 6h-8v-2h8v2zm0-4h-8v-2h8v2z"
+              />
+            </svg>
+            Bahan
+          </span>
+          <span class="value">Kayu Jati</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label" title="Warna produk">
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            Warna
+          </span>
+          <span class="value">Coklat Muda</span>
+        </div>
+      </section>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <section class="price-section" aria-labelledby="priceTitle">
+        <h3 id="priceTitle" class="price-label">Price</h3>
+        <div
+          class="price-box"
+          aria-live="polite"
+          aria-atomic="true"
+          aria-relevant="text"
+        >
+          Rp.5.800.000
+        </div>
+      </section>
+
+      <section class="variant-section" aria-label="Pilih varian kayu">
+        <div class="variant-label">Pilih Varian Kayu</div>
+        <div
+          class="variant-options"
+          role="radiogroup"
+          aria-labelledby="variantLabel"
+        >
+          <button
+            type="button"
+            role="radio"
+            aria-checked="true"
+            tabindex="0"
+            class="variant-option selected"
+            data-variant="Oak"
+            aria-label="Varian kayu Oak, terpilih"
+          >
+            Oak
+          </button>
+          <button
+            type="button"
+            role="radio"
+            aria-checked="false"
+            tabindex="-1"
+            class="variant-option"
+            data-variant="Maple"
+            aria-label="Varian kayu Maple"
+          >
+            Maple
+          </button>
+          <button
+            type="button"
+            role="radio"
+            aria-checked="false"
+            tabindex="-1"
+            class="variant-option"
+            data-variant="Jati"
+            aria-label="Varian kayu Jati"
+          >
+            Jati
+          </button>
+        </div>
+        <div class="variant-subtext">Pilih Lapisan Kayu yang kamu Sukai.</div>
+      </section>
+
+      <div class="buttons-container">
+        <button
+          type="button"
+          class="btn-cart"
+          aria-label="Tambahkan ke Keranjang"
+          id="addToCartBtn"
+        >
+          Tambahkan ke Keranjang
+        </button>
+        <button
+          type="button"
+          class="btn-checkout"
+          aria-label="Checkout sekarang"
+          id="checkoutBtn"
+        >
+          Checkout
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Variant selection logic
+      const variantOptions = document.querySelectorAll(".variant-option");
+      variantOptions.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (button.classList.contains("selected")) return;
+
+          // Deselect all
+          variantOptions.forEach((btn) => {
+            btn.classList.remove("selected");
+            btn.setAttribute("aria-checked", "false");
+            btn.tabIndex = -1;
+          });
+
+          // Select clicked
+          button.classList.add("selected");
+          button.setAttribute("aria-checked", "true");
+          button.tabIndex = 0;
+
+          // Focus for accessibility
+          button.focus();
+        });
+      });
+
+      // Optional: add to cart and checkout buttons can have handlers here
+      document.getElementById("addToCartBtn").addEventListener("click", () => {
+        alert("Produk berhasil ditambahkan ke keranjang.");
+      });
+
+      document.getElementById("checkoutBtn").addEventListener("click", () => {
+        alert("Menuju halaman checkout.");
+      });
+    </script>
+  </body>
+</html>

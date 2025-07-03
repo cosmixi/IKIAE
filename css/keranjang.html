@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Keranjang</title>
+    <style>
+      /* Reset & Base */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f5f1e7;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #2b2b2b;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.5;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .container {
+        background-color: #d6cfc5;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 100%;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 1.25rem 1.5rem 1.25rem;
+      }
+      h2 {
+        font-weight: 700;
+        font-size: 1.4rem;
+        margin: 0 0 1rem 0;
+      }
+      h3 {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      p.section-subtitle {
+        font-weight: 500;
+        font-size: 0.88rem;
+        opacity: 0.7;
+        margin: 0 0 1rem 0;
+      }
+      /* Product List */
+      .product-list {
+        background: #e8e0d7;
+        border-radius: 6px;
+        padding: 0.5rem;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+      }
+      .product-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0.4rem;
+        border-bottom: 1px solid #c7bdb0;
+      }
+      .product-item:last-child {
+        border-bottom: none;
+      }
+      .product-icon {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        background: #beb9ac;
+        border-radius: 6px;
+        margin-right: 0.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        color: #7f7a6e;
+        user-select: none;
+      }
+      .product-details {
+        flex-grow: 1;
+        overflow: hidden;
+      }
+      .product-name {
+        font-weight: 600;
+        font-size: 1rem;
+        margin: 0 0 2px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .product-subtext {
+        font-size: 0.83rem;
+        color: #55514a;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        user-select: none;
+        opacity: 0.75;
+        margin: 0;
+      }
+      .product-price {
+        flex-shrink: 0;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: #3e3b38;
+        margin-left: 0.85rem;
+        white-space: nowrap;
+        user-select: none;
+      }
+      /* Summary */
+      .summary {
+        background: #e8e0d7;
+        border-radius: 6px;
+        padding: 1rem 1.25rem;
+        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.12);
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        color: #3a3835;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 0;
+        justify-content: space-between;
+      }
+      .summary > div {
+        min-width: 45%;
+      }
+      .summary label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+        font-size: 0.88rem;
+        color: #423c32;
+      }
+      .summary .value {
+        font-weight: 600;
+        color: #1e201d;
+        font-size: 1.05rem;
+      }
+      /* Buttons */
+      .btn {
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 5px;
+        user-select: none;
+        transition: background-color 0.25s ease, color 0.25s ease;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        text-decoration: none;
+      }
+      .btn-shop {
+        background-color: #f8f6f1;
+        color: #3a3835;
+        border: 2px solid #3a3835;
+        margin-bottom: 0.7rem;
+      }
+      .btn-shop:hover,
+      .btn-shop:focus {
+        background-color: #3a3835;
+        color: #f8f6f1;
+        outline: none;
+        border-color: #3a3835;
+      }
+      .btn-checkout {
+        background-color: #3a3835;
+        color: #f8f6f1;
+        border: 2px solid #3a3835;
+        font-weight: 700;
+      }
+      .btn-checkout:hover,
+      .btn-checkout:focus {
+        background-color: #5c594f;
+        border-color: #5c594f;
+        outline: none;
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 420px) {
+        .container {
+          max-width: 100%;
+          padding: 1rem 1rem 1.25rem 1rem;
+        }
+        .summary > div {
+          min-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container" aria-label="Ringkasan Keranjang Belanja">
+      <h2>Keranjang</h2>
+      <p class="section-subtitle" id="produk-subtitle">
+        Produk yang ada di Keranjang
+      </p>
+      <div class="product-list" aria-labelledby="produk-subtitle" role="list">
+        <!-- Produk 1 -->
+        <article
+          class="product-item"
+          role="listitem"
+          tabindex="0"
+          aria-label="Produk Kursi Kerja, Deskripsi: Kursi kerja modern, Harga Rp 1.787.000"
+        >
+          <div class="product-icon" aria-hidden="true">🪑</div>
+          <div class="product-details">
+            <h3 class="product-name">Kursi Kerja</h3>
+            <p class="product-subtext">Desain Modern Ergonomis</p>
+          </div>
+          <div class="product-price">Rp 1.787.000</div>
+        </article>
+        <!-- Produk 2 -->
+        <article
+          class="product-item"
+          role="listitem"
+          tabindex="0"
+          aria-label="Produk Sofa Modern, Deskripsi: Sofa nyaman untuk ruang tamu, Harga Rp 3.590.000"
+        >
+          <div class="product-icon" aria-hidden="true">🛋️</div>
+          <div class="product-details">
+            <h3 class="product-name">Sofa Modern</h3>
+            <p class="product-subtext">Desain Rumah Ruang</p>
+          </div>
+          <div class="product-price">Rp 3.590.000</div>
+        </article>
+        <!-- Produk 3 -->
+        <article
+          class="product-item"
+          role="listitem"
+          tabindex="0"
+          aria-label="Produk Dapur Kayu, Deskripsi: Meja kayu alami untuk dapur, Harga Rp 800.000"
+        >
+          <div class="product-icon" aria-hidden="true">🪵</div>
+          <div class="product-details">
+            <h3 class="product-name">Dipan Kayu</h3>
+            <p class="product-subtext">Kayu Alami Unggulan</p>
+          </div>
+          <div class="product-price">Rp 800.000</div>
+        </article>
+      </div>
+
+      <div class="summary" aria-label="Rangkuman total pembayaran dan biaya">
+        <div class="summary-item">
+          <label for="total-item">Total Item</label>
+          <div id="total-item" class="value" aria-live="polite">2</div>
+        </div>
+        <div class="summary-item">
+          <label for="subtotal">Subtotal</label>
+          <div id="subtotal" class="value" aria-live="polite">Rp 5.987.000</div>
+        </div>
+        <div class="summary-item">
+          <label for="ongkir">Ongkir Pengiriman</label>
+          <div id="ongkir" class="value" aria-live="polite">Rp 50.000</div>
+        </div>
+        <div class="summary-item">
+          <label for="total">Total</label>
+          <div id="total" class="value" aria-live="polite">Rp 6.037.000</div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-shop" aria-label="Lanjutkan Belanja">
+        Continue Shopping
+      </button>
+      <button
+        type="button"
+        class="btn btn-checkout"
+        aria-label="Lanjut ke Pembayaran"
+      >
+        Proceed to Checkout
+      </button>
+    </section>
+  </body>
+</html>

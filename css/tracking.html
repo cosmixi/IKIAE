@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tracking Pengiriman</title>
+    <style>
+      /* Root & Basic Resets */
+      :root {
+        --bg-light: #d7cabd;
+        --bg-step-active: #a17a60;
+        --bg-step-inactive: #f3ede8;
+        --text-dark: #2e2e2e;
+        --text-light: #fff;
+        --accent: #614737;
+        --btn-bg: #000;
+        --btn-text: #fff;
+        --btn-radius: 6px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.4;
+      }
+      .container {
+        max-width: 480px;
+        margin: 1rem auto 2rem;
+        background: var(--bg-light);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+        padding: 1rem 1rem 2rem;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--accent);
+        margin-bottom: 0.6rem;
+      }
+      header button.back-btn {
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        padding: 0 0.5rem 0 0;
+        cursor: pointer;
+        color: var(--accent);
+        user-select: none;
+        font-weight: 600;
+      }
+      header button.back-btn:focus-visible {
+        outline-offset: 3px;
+        outline: 2px solid var(--accent);
+      }
+      header span.title-text {
+        flex-grow: 1;
+        padding-left: 0.3rem;
+      }
+
+      /* Map container */
+      .map-container {
+        overflow: hidden;
+        border-radius: 10px;
+        height: 180px;
+        margin-bottom: 1rem;
+      }
+      .map-container iframe,
+      .map-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: none;
+        display: block;
+      }
+
+      /* Steps tracking timeline */
+      .timeline {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 1rem;
+      }
+      .timeline-item {
+        flex: 1;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--accent);
+        cursor: default;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .timeline-item .icon {
+        background: var(--bg-step-inactive);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        margin-bottom: 0.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 1px 1px 3px rgb(0 0 0 / 0.1);
+        font-size: 20px;
+        color: var(--accent);
+        user-select: none;
+      }
+      /* Highlight the active step */
+      .timeline-item.active .icon {
+        background: var(--bg-step-active);
+        color: var(--text-light);
+        box-shadow: 0 0 8px var(--bg-step-active);
+      }
+
+      /* Timeline detailed events */
+      .events {
+        list-style: none;
+        padding-left: 0;
+        margin: 0 0 1.2rem 0;
+        font-size: 0.9rem;
+        color: var(--text-dark);
+      }
+      .events li {
+        display: flex;
+        padding: 0.4rem 0;
+        border-bottom: 1px solid #ccc8c0;
+        align-items: flex-start;
+      }
+      .events li:last-child {
+        border-bottom: none;
+      }
+      .events .time {
+        flex: 0 0 58px;
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .events .desc {
+        flex-grow: 1;
+        padding-left: 0.5rem;
+        white-space: pre-line;
+      }
+
+      /* Buttons container */
+      .actions {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      button {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: var(--btn-radius);
+        border: 2px solid var(--btn-bg);
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      button.chat-btn {
+        background-color: transparent;
+        color: var(--btn-bg);
+      }
+      button.chat-btn:hover,
+      button.chat-btn:focus-visible {
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+      }
+      button.seller-btn {
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+      }
+      button.seller-btn:hover,
+      button.seller-btn:focus-visible {
+        background-color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      /* Bottom black full width button */
+      .btn-home {
+        display: block;
+        width: 100%;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 0.9rem 0;
+        border: none;
+        border-radius: var(--btn-radius);
+        cursor: pointer;
+        user-select: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.4);
+      }
+      .btn-home:hover,
+      .btn-home:focus-visible {
+        background-color: var(--accent);
+        outline: none;
+      }
+
+      /* Responsive typography */
+      @media (min-width: 360px) {
+        body {
+          font-size: 16px;
+        }
+      }
+      @media (min-width: 480px) {
+        body {
+          font-size: 17px;
+        }
+      }
+      @media (min-width: 640px) {
+        .container {
+          max-width: 580px;
+          margin: 1.5rem auto 2.5rem;
+          padding: 1.5rem 2rem 2.5rem;
+        }
+        .timeline-item {
+          font-size: 0.9rem;
+        }
+        button {
+          font-size: 1.1rem;
+          padding: 0.8rem 1.2rem;
+        }
+        .events {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container" role="main" aria-label="Tracking pengiriman">
+      <header>
+        <button
+          class="back-btn"
+          aria-label="Kembali ke halaman sebelumnya"
+          onclick="history.back()"
+        >
+          <
+        </button>
+        <span class="title-text">Kembali</span>
+      </header>
+
+      <section class="map-container" aria-label="Peta rute pengiriman">
+        <!-- Map placeholder image with detailed alt text -->
+        <img
+          src="https://akcdn.detik.net.id/visual/2023/09/06/google-maps-ktt-asean_169.png?w=900&q=80"
+          alt="Peta dengan rute pengiriman berwarna biru yang menampilkan jalur dari pusat sortir Cakung menuju alamat tujuan, di latar belakang peta jalan dan landmark sekitar."
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+      </section>
+
+      <nav class="timeline" aria-label="Tahapan pengiriman">
+        <div
+          class="timeline-item active"
+          tabindex="0"
+          aria-current="step"
+          aria-label="Tahap 1: Menyiapkan pengiriman"
+        >
+          <div class="icon" aria-hidden="true">📄</div>
+          <span>Siapkan</span>
+        </div>
+        <div
+          class="timeline-item"
+          tabindex="0"
+          aria-label="Tahap 2: Paket sudah di drop-off"
+        >
+          <div class="icon" aria-hidden="true">📦</div>
+          <span>Drop-off</span>
+        </div>
+        <div
+          class="timeline-item"
+          tabindex="0"
+          aria-label="Tahap 3: Pusat sortir Cakung"
+        >
+          <div class="icon" aria-hidden="true">🏭</div>
+          <span>Sortir</span>
+        </div>
+        <div
+          class="timeline-item"
+          tabindex="0"
+          aria-label="Tahap 4: Berangkat dari pusat sortir Cakung"
+        >
+          <div class="icon" aria-hidden="true">🚚</div>
+          <span>Berangkat</span>
+        </div>
+        <div
+          class="timeline-item"
+          tabindex="0"
+          aria-label="Tahap 5: Tiba di Semarang"
+        >
+          <div class="icon" aria-hidden="true">🏢</div>
+          <span>Semarang</span>
+        </div>
+        <div
+          class="timeline-item"
+          tabindex="0"
+          aria-label="Tahap 6: Pesanan menuju alamat Anda"
+        >
+          <div class="icon" aria-hidden="true">⭐</div>
+          <span>Menuju</span>
+        </div>
+      </nav>
+
+      <ul class="events" aria-label="Detail waktu dan keterangan pengiriman">
+        <li>
+          <time class="time" datetime="PT1H25M">01.25</time>
+          <p class="desc">Menyiapkan pengiriman</p>
+        </li>
+        <li>
+          <time class="time" datetime="PT2H35M">02.35</time>
+          <p class="desc">Paket sudah di drop-off</p>
+        </li>
+        <li>
+          <time class="time" datetime="PT4H00M">04.00</time>
+          <p class="desc">Tiba di pusat sortir Cakung</p>
+        </li>
+        <li>
+          <time class="time" datetime="PT7H35M">07.35</time>
+          <p class="desc">Berangkat dari pusat sortir Cakung</p>
+        </li>
+        <li>
+          <time class="time" datetime="PT10H00M">10.00</time>
+          <p class="desc">Tiba di Semarang</p>
+        </li>
+        <li>
+          <time class="time" datetime="PT12H10M">12.10</time>
+          <p class="desc">Pesanan menuju alamat anda</p>
+        </li>
+      </ul>
+
+      <section class="actions" aria-label="Pilihan chat dan hubungi seller">
+        <button
+          class="chat-btn"
+          type="button"
+          aria-label="Mulai chat dengan kurir pengiriman"
+        >
+          Chat Kurir
+        </button>
+        <button
+          class="seller-btn"
+          type="button"
+          aria-label="Hubungi penjual produk"
+        >
+          Hubungi Seller
+        </button>
+      </section>
+
+      <button
+        class="btn-home"
+        type="button"
+        aria-label="Kembali ke halaman beranda"
+        onclick="location.href='/'"
+      >
+        Kembali Ke Beranda
+      </button>
+    </main>
+  </body>
+</html>
