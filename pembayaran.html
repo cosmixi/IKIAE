@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pembayaran Berhasil</title>
     <style>
-      /* Reset & base */
       * {
         box-sizing: border-box;
       }
@@ -20,8 +19,6 @@
         min-height: 100vh;
         padding: 1rem;
       }
-
-      /* Container */
       .container {
         max-width: 400px;
         width: 100%;
@@ -33,8 +30,6 @@
         flex-direction: column;
         gap: 1.25rem;
       }
-
-      /* Header back */
       .back {
         font-weight: 600;
         font-size: 1rem;
@@ -46,6 +41,7 @@
         align-items: center;
         gap: 0.25rem;
         transition: color 0.2s ease;
+        text-decoration: none;
       }
       .back:hover {
         color: #6f4e1e;
@@ -56,8 +52,6 @@
         font-size: 1.2rem;
         line-height: 1;
       }
-
-      /* Success Icon Circle */
       .icon-circle {
         width: 96px;
         height: 96px;
@@ -84,8 +78,6 @@
         width: 20px;
         height: 20px;
       }
-
-      /* Title */
       .title {
         font-weight: 700;
         font-size: 1.25rem;
@@ -95,8 +87,6 @@
         margin-top: 0.5rem;
         user-select: none;
       }
-
-      /* Info card */
       .info-card {
         background-color: #4b2e0b;
         border-radius: 12px;
@@ -122,13 +112,10 @@
         text-align: right;
         word-break: break-word;
       }
-      /* Highlight payment method */
       .value.method {
         color: #e1ad01;
         font-weight: 700;
       }
-
-      /* Buttons container */
       .button-container {
         display: flex;
         gap: 1rem;
@@ -136,7 +123,7 @@
         justify-content: center;
         flex-wrap: wrap;
       }
-      button {
+      .btn-link {
         flex: 1 1 140px;
         padding: 0.5rem 1rem;
         font-size: 0.95rem;
@@ -146,34 +133,34 @@
         cursor: pointer;
         user-select: none;
         transition: background-color 0.3s ease, color 0.3s ease;
+        text-align: center;
+        text-decoration: none;
       }
-      button:focus {
+      .btn-link:focus {
         outline: 3px solid #e1ad01;
         outline-offset: 3px;
       }
-      button.primary {
+      .btn-link.primary {
         background-color: #4b2e0b;
         color: #d6c6b6;
       }
-      button.primary:hover,
-      button.primary:focus {
+      .btn-link.primary:hover,
+      .btn-link.primary:focus {
         background-color: #6f4e1e;
         border-color: #6f4e1e;
         color: #fff9e6;
       }
-      button.secondary {
+      .btn-link.secondary {
         background-color: #d6c6b6;
         color: #4b2e0b;
         border: 2px solid #4b2e0b;
       }
-      button.secondary:hover,
-      button.secondary:focus {
+      .btn-link.secondary:hover,
+      .btn-link.secondary:focus {
         background-color: #bba983;
         color: #4b2e0b;
         border-color: #69522a;
       }
-
-      /* Responsive adjustments */
       @media (max-width: 480px) {
         .container {
           max-width: 100%;
@@ -195,7 +182,7 @@
           width: 18px;
           height: 18px;
         }
-        button {
+        .btn-link {
           flex: 1 1 100%;
         }
       }
@@ -207,8 +194,7 @@
       role="main"
       aria-label="Halaman konfirmasi pembayaran berhasil"
     >
-      <a href="#" class="back" aria-label="Kembali"> Kembali </a>
-
+      <a href="checkout.html" class="back" aria-label="Kembali"> Kembali </a>
       <section
         aria-describedby="success-title"
         class="success-section"
@@ -225,33 +211,38 @@
         </div>
         <h1 id="success-title" class="title">PEMBAYARAN BERHASIL</h1>
       </section>
-
       <section class="info-card" aria-label="Detail pembayaran">
         <div class="info-row">
-          <span class="label">Total Pembayaran</span>
-          <span class="value">Rp 6.037.000</span>
+          <span class="label">Total Pembayaran</span
+          ><span class="value">Rp 6.227.000</span>
         </div>
         <div class="info-row">
-          <span class="label">Nomor Pemesanan</span>
-          <span class="value">2345768091278249629</span>
+          <span class="label">Nomor Pemesanan</span
+          ><span class="value">2345768091278249629</span>
         </div>
         <div class="info-row">
-          <span class="label">Metode Pembayaran</span>
-          <span class="value method">Transfer Bank</span>
+          <span class="label">Metode Pembayaran</span
+          ><span class="value method">Transfer Bank</span>
         </div>
       </section>
-
       <section
         class="button-container"
         role="group"
         aria-label="Aksi tombol navigasi"
       >
-        <button class="secondary" type="button" aria-label="Kembali ke Beranda">
-          Kembali ke Beranda
-        </button>
-        <button class="primary" type="button" aria-label="Lacak Pemesanan">
-          Lacak Pemesanan
-        </button>
+        <a
+          href="beranda.html"
+          class="btn-link secondary"
+          aria-label="Kembali ke Beranda"
+          href="beranda.html"
+          >Kembali ke Beranda</a
+        >
+        <a
+          class="btn-link primary"
+          aria-label="Lacak Pemesanan"
+          href="tracking.html"
+          >Lacak Pemesanan</a
+        >
       </section>
     </main>
   </body>

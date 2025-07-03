@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Furniture Koleksi</title>
     <style>
-      /* Reset & base */
       * {
         box-sizing: border-box;
       }
@@ -22,19 +21,15 @@
         text-decoration: none;
         color: inherit;
       }
-
-      /* Container */
       .container {
         max-width: 480px;
         margin: 0 auto;
-        padding: 16px 12px 56px; /* bottom padding for nav space */
+        padding: 16px 12px 56px;
         background: #f8f4ef;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
       }
-
-      /* Hero Slide */
       .hero-slide {
         position: relative;
         border-radius: 12px;
@@ -46,7 +41,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 24px 24px 72px; /* space below for dots */
+        padding: 24px 24px 72px;
         text-align: center;
         font-weight: 600;
         font-size: 1.1rem;
@@ -86,8 +81,6 @@
       .hero-dot.active {
         background: #444;
       }
-
-      /* Category Selector */
       .categories {
         display: flex;
         justify-content: space-between;
@@ -134,8 +127,6 @@
       .category-btn:focus img {
         filter: none;
       }
-
-      /* Section Title */
       h2.section-title {
         margin: 0 0 12px 6px;
         font-weight: 700;
@@ -143,13 +134,11 @@
         color: #6d5841;
         user-select: none;
       }
-
-      /* Product Cards Grid */
       .cards-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
-        margin-bottom: 60px; /* bottom spacing */
+        margin-bottom: 60px;
       }
       .card {
         background: #fff;
@@ -218,8 +207,6 @@
       .card .icon-btn svg {
         pointer-events: none;
       }
-
-      /* Bottom Navigation */
       nav.bottom-nav {
         position: fixed;
         bottom: 0;
@@ -236,7 +223,8 @@
         user-select: none;
         z-index: 10;
       }
-      nav.bottom-nav button {
+      /* Modified nav buttons to be links */
+      nav.bottom-nav a {
         background: transparent;
         border: none;
         display: flex;
@@ -247,19 +235,21 @@
         cursor: pointer;
         padding: 2px;
         transition: color 0.3s ease;
+        flex-grow: 1;
+        justify-content: center;
       }
-      nav.bottom-nav button:focus,
-      nav.bottom-nav button:hover {
+      nav.bottom-nav a:focus,
+      nav.bottom-nav a:hover {
         color: #a08044;
         outline: none;
       }
-      nav.bottom-nav button svg {
+      nav.bottom-nav a svg {
         width: 20px;
         height: 20px;
         margin-bottom: 4px;
         fill: currentColor;
       }
-      nav.bottom-nav button.active {
+      nav.bottom-nav a.active {
         color: #493511;
         font-weight: 700;
       }
@@ -307,44 +297,37 @@
           ></button>
         </div>
       </section>
-
       <nav class="categories" aria-label="Kategori furniture">
         <button class="category-btn" aria-pressed="false" tabindex="0">
           <img
             src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d2812a28-2849-4750-947c-7e2df11d7363.png"
             alt="Ikon kursi bergaya minimalis berwarna netral dengan kayu alami"
             onerror="this.style.display='none'"
-          />
-          Kursi
+          />Kursi
         </button>
         <button class="category-btn" aria-pressed="false" tabindex="0">
           <img
             src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/31bd0915-ac6e-4aff-a56a-c8a246dbabcf.png"
             alt="Ikon kasur putih modern dengan garis sederhana dan nyaman"
             onerror="this.style.display='none'"
-          />
-          Kasur
+          />Kasur
         </button>
         <button class="category-btn" aria-pressed="false" tabindex="0">
           <img
             src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26cb4474-3600-4d9b-9da8-45e7b27a78a3.png"
             alt="Ikon pintu kayu dengan desain sederhana dan elegan"
             onerror="this.style.display='none'"
-          />
-          Pintu
+          />Pintu
         </button>
         <button class="category-btn" aria-pressed="false" tabindex="0">
           <img
             src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b1dbb540-1f4c-41a7-a1cd-a3a2c1c8818e.png"
             alt="Ikon pajangan dekoratif dinding dengan frame kayu dan tanaman hijau kecil"
             onerror="this.style.display='none'"
-          />
-          Hiasan
+          />Hiasan
         </button>
       </nav>
-
       <h2 class="section-title" tabindex="0">Rekomendasi Untukmu</h2>
-
       <section class="cards-grid" aria-label="Rekomendasi produk furniture">
         <article
           class="card"
@@ -393,7 +376,6 @@
             </button>
           </div>
         </article>
-
         <article
           class="card"
           tabindex="0"
@@ -441,55 +423,56 @@
             </button>
           </div>
         </article>
-
-        <article
+        <a
+          href="produk.html"
           class="card"
           tabindex="0"
-          aria-labelledby="meja-tamu-title"
-          aria-describedby="meja-tamu-price badge3"
+          aria-labelledby="dipan-kayu-title"
+          aria-describedby="dipan-kayu-price badge3"
         >
-          <img
-            class="product-image"
-            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/659ae046-5413-4c25-ae48-9878557be86f.png"
-            alt="Meja tamu bulat dari kayu gelap dengan desain modern minimalis di ruang keluarga"
-            onerror="this.style.display='none'"
-          />
-          <div class="tag" id="badge3">Paling Popular</div>
-          <h3 class="title" id="meja-tamu-title">Meja Tamu</h3>
-          <p class="price" id="meja-tamu-price">Rp.550.000</p>
-          <div class="actions">
-            <button
-              aria-label="Tambahkan meja tamu ke keranjang"
-              class="icon-btn"
-              tabindex="0"
-              title="Tambah ke keranjang"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path
-                  d="M7 18c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm10 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-12.832-2l.944-2h11.552l1.224-6H6.184l-.4-2H3v2h2l3.6 7.59-1.35 2.44C6.518 17.37 7.48 19 9 19h9v-2H9l.168-.002z"
-                />
-              </svg>
-            </button>
-            <button
-              aria-label="Tandai meja tamu favorit"
-              class="icon-btn"
-              tabindex="0"
-              title="Favorit"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-                fill="currentColor"
+          <article>
+            <img
+              class="product-image"
+              src="https://placehold.co/380x260?text=Dipan+Kayu"
+              alt="Dipan kayu minimalis dengan warna natural"
+              onerror="this.style.display='none'"
+            />
+            <div class="tag" id="badge3">Paling Populer</div>
+            <h3 class="title" id="dipan-kayu-title">Dipan Kayu</h3>
+            <p class="price" id="dipan-kayu-price">Rp.800.000</p>
+            <div class="actions">
+              <button
+                aria-label="Tambahkan Dipan Kayu ke keranjang"
+                class="icon-btn"
+                tabindex="0"
+                title="Tambah ke keranjang"
               >
-                <path
-                  d="M12 17.27L18.18 21l-1.63-7 5.46-4.73-7.19-.61L12 2 9.18 8.67l-7.19.61 5.46 4.73-1.63 7z"
-                />
-              </svg>
-            </button>
-          </div>
-        </article>
-
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M7 18c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm10 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-12.832-2l.944-2h11.552l1.224-6H6.184l-.4-2H3v2h2l3.6 7.59-1.35 2.44C6.518 17.37 7.48 19 9 19h9v-2H9l.168-.002z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Tandai Dipan Kayu favorit"
+                class="icon-btn"
+                tabindex="0"
+                title="Favorit"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.63-7 5.46-4.73-7.19-.61L12 2 9.18 8.67l-7.19.61 5.46 4.73-1.63 7z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </article>
+        </a>
         <article
           class="card"
           tabindex="0"
@@ -539,56 +522,64 @@
         </article>
       </section>
     </main>
-
     <nav
       class="bottom-nav"
       role="navigation"
       aria-label="Menu navigasi bawah utama"
     >
-      <button aria-label="Beranda" class="active" tabindex="0" title="Beranda">
+      <a
+        href="beranda.html"
+        aria-label="Beranda"
+        class="active"
+        tabindex="0"
+        title="Beranda"
+      >
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </svg>
-        Beranda
-      </button>
-      <button aria-label="Favorit" tabindex="0" title="Favorit">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg
+        >Beranda
+      </a>
+      <a href="#" aria-label="Favorit" tabindex="0" title="Favorit">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path
             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.41 4.41 3 7.5 3c1.74 0 3.41 1 4.5 2.09C13.09 4 14.76 3 16.5 3 19.59 3 22 5.41 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-          />
-        </svg>
-        Favorit
-      </button>
-      <button aria-label="Pencarian" tabindex="0" title="Pencarian">
+          /></svg
+        >Favorit
+      </a>
+      <a
+        href="produk.html"
+        aria-label="Pencarian"
+        tabindex="0"
+        title="Pencarian"
+      >
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path
             d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16a6.471 6.471 0 004.23-1.57l.27.28v.79l4.99 5L20.49 19l-5-5zM9.5 14C7 14 5 12 5 9.5S7 5 9.5 5 14 7 14 9.5 12 14 9.5 14z"
-          />
-        </svg>
-        Pencarian
-      </button>
-      <button aria-label="Keranjang" tabindex="0" title="Keranjang">
+          /></svg
+        >Pencarian
+      </a>
+      <a
+        href="keranjang.html"
+        aria-label="Keranjang"
+        tabindex="0"
+        title="Keranjang"
+      >
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path
             d="M7 18c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm10 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-12.832-2l.944-2h11.552l1.224-6H6.184l-.4-2H3v2h2l3.6 7.59-1.35 2.44C6.518 17.37 7.48 19 9 19h9v-2H9l.168-.002z"
-          />
-        </svg>
-        Keranjang
-      </button>
-      <button aria-label="Profil Saya" tabindex="0" title="Saya">
+          /></svg
+        >Keranjang
+      </a>
+      <a href="profile.html" aria-label="Profil Saya" tabindex="0" title="Saya">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path
             d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-          />
-        </svg>
-        Saya
-      </button>
+          /></svg
+        >Saya
+      </a>
     </nav>
-
     <script>
-      // Hero slide dots interaction (example functionality, no slide changes here as only one slide)
       const dots = document.querySelectorAll(".hero-dot");
-      dots.forEach((dot, idx) => {
+      dots.forEach((dot) => {
         dot.addEventListener("click", () => {
           dots.forEach((d) => {
             d.classList.remove("active");

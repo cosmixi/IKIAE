@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Keranjang</title>
     <style>
-      /* Reset & Base */
-      *,
-      *::before,
-      *::after {
+      * {
         box-sizing: border-box;
       }
       body {
@@ -42,8 +39,7 @@
       h3 {
         font-weight: 600;
         font-size: 1.1rem;
-        margin-top: 1.5rem;
-        margin-bottom: 0.5rem;
+        margin: 0;
       }
       p.section-subtitle {
         font-weight: 500;
@@ -51,7 +47,6 @@
         opacity: 0.7;
         margin: 0 0 1rem 0;
       }
-      /* Product List */
       .product-list {
         background: #e8e0d7;
         border-radius: 6px;
@@ -113,7 +108,6 @@
         white-space: nowrap;
         user-select: none;
       }
-      /* Summary */
       .summary {
         background: #e8e0d7;
         border-radius: 6px;
@@ -143,7 +137,6 @@
         color: #1e201d;
         font-size: 1.05rem;
       }
-      /* Buttons */
       .btn {
         cursor: pointer;
         display: block;
@@ -184,8 +177,6 @@
         border-color: #5c594f;
         outline: none;
       }
-
-      /* Responsive tweaks */
       @media (max-width: 420px) {
         .container {
           max-width: 100%;
@@ -204,7 +195,6 @@
         Produk yang ada di Keranjang
       </p>
       <div class="product-list" aria-labelledby="produk-subtitle" role="list">
-        <!-- Produk 1 -->
         <article
           class="product-item"
           role="listitem"
@@ -218,7 +208,6 @@
           </div>
           <div class="product-price">Rp 1.787.000</div>
         </article>
-        <!-- Produk 2 -->
         <article
           class="product-item"
           role="listitem"
@@ -232,7 +221,6 @@
           </div>
           <div class="product-price">Rp 3.590.000</div>
         </article>
-        <!-- Produk 3 -->
         <article
           class="product-item"
           role="listitem"
@@ -247,15 +235,14 @@
           <div class="product-price">Rp 800.000</div>
         </article>
       </div>
-
       <div class="summary" aria-label="Rangkuman total pembayaran dan biaya">
         <div class="summary-item">
           <label for="total-item">Total Item</label>
-          <div id="total-item" class="value" aria-live="polite">2</div>
+          <div id="total-item" class="value" aria-live="polite">3</div>
         </div>
         <div class="summary-item">
           <label for="subtotal">Subtotal</label>
-          <div id="subtotal" class="value" aria-live="polite">Rp 5.987.000</div>
+          <div id="subtotal" class="value" aria-live="polite">Rp 6.177.000</div>
         </div>
         <div class="summary-item">
           <label for="ongkir">Ongkir Pengiriman</label>
@@ -263,20 +250,19 @@
         </div>
         <div class="summary-item">
           <label for="total">Total</label>
-          <div id="total" class="value" aria-live="polite">Rp 6.037.000</div>
+          <div id="total" class="value" aria-live="polite">Rp 6.227.000</div>
         </div>
       </div>
-
-      <button type="button" class="btn btn-shop" aria-label="Lanjutkan Belanja">
-        Continue Shopping
-      </button>
-      <button
-        type="button"
+      <a href="beranda.html" class="btn btn-shop" aria-label="Lanjutkan Belanja"
+        >Continue Shopping</a
+      >
+      <a
+        href="checkout.html"
         class="btn btn-checkout"
         aria-label="Lanjut ke Pembayaran"
-      >
-        Proceed to Checkout
-      </button>
+        href="checkout.html"
+        >Proceed to Checkout
+      </a>
     </section>
   </body>
 </html>

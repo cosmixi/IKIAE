@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Profile User</title>
     <style>
-      /* Reset some default */
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
-
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -21,15 +19,12 @@
         flex-direction: column;
         min-height: 100vh;
       }
-
       header {
         background-color: #d9c9ba;
         padding: 1rem 1.2rem 2.2rem 1.2rem;
         position: relative;
         box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
       }
-
-      /* Back arrow top left */
       .back-arrow {
         position: absolute;
         left: 1rem;
@@ -48,8 +43,6 @@
       .back-arrow:hover {
         stroke: #3b2e1e;
       }
-
-      /* Chat bubble top right */
       .chat-bubble {
         position: absolute;
         right: 1rem;
@@ -68,7 +61,6 @@
       .chat-bubble:hover {
         stroke: #3b2e1e;
       }
-
       .profile-container {
         display: flex;
         align-items: center;
@@ -76,7 +68,6 @@
         margin-top: 2.75rem;
         margin-left: 1.2rem;
       }
-
       .user-icon {
         width: 48px;
         height: 48px;
@@ -86,14 +77,12 @@
         border-radius: 50%;
         box-shadow: inset 0 0 0 2px #5f4425;
       }
-
       .username {
         font-weight: 700;
         letter-spacing: 0.03em;
         font-size: 1rem;
         color: #7a5527;
       }
-
       main {
         flex-grow: 1;
         padding: 1.8rem 1.2rem 1.2rem 1.2rem;
@@ -101,14 +90,11 @@
         border-top-left-radius: 24px;
         border-top-right-radius: 24px;
       }
-
-      /* Features icons and labels container */
       .features {
         display: flex;
         justify-content: space-around;
         margin-bottom: 2.5rem;
       }
-
       .feature-item {
         display: flex;
         flex-direction: column;
@@ -118,8 +104,9 @@
         font-size: 0.85rem;
         cursor: pointer;
         user-select: none;
+        border: none;
+        background: transparent;
       }
-
       .feature-item svg {
         width: 26px;
         height: 26px;
@@ -139,8 +126,6 @@
       .feature-item:focus {
         color: #7a5527;
       }
-
-      /* Content image card */
       .content-card {
         max-width: 360px;
         margin: 0 auto;
@@ -153,8 +138,6 @@
         display: block;
         object-fit: cover;
       }
-
-      /* Bottom navigation bar */
       nav.bottom-nav {
         display: flex;
         justify-content: space-around;
@@ -164,7 +147,7 @@
         border-top: 1px solid #d9c9ba;
         box-shadow: 0 -3px 8px rgb(0 0 0 / 0.07);
       }
-      nav.bottom-nav button {
+      nav.bottom-nav a {
         border: none;
         background: none;
         color: #6b5447;
@@ -176,8 +159,9 @@
         font-weight: 600;
         user-select: none;
         padding: 0.2rem 0.4rem;
+        text-decoration: none;
       }
-      nav.bottom-nav button svg {
+      nav.bottom-nav a svg {
         width: 20px;
         height: 20px;
         stroke: currentColor;
@@ -187,23 +171,25 @@
         fill: none;
         transition: stroke 0.25s ease;
       }
-      nav.bottom-nav button.active,
-      nav.bottom-nav button:hover {
+      nav.bottom-nav a.active,
+      nav.bottom-nav a:hover {
         color: #ac5b1f;
       }
-      nav.bottom-nav button.active svg {
+      nav.bottom-nav a.active svg {
         stroke-width: 2.5;
       }
     </style>
   </head>
   <body>
     <header>
-      <button class="back-arrow" aria-label="Kembali" title="Kembali">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-
+      <a
+        href="beranda.html"
+        class="back-arrow"
+        aria-label="Kembali"
+        title="Kembali"
+        ><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <polyline points="15 18 9 12 15 6"></polyline></svg
+      ></a>
       <button class="chat-bubble" aria-label="Chat" title="Chat">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path
@@ -211,7 +197,6 @@
           ></path>
         </svg>
       </button>
-
       <div class="profile-container">
         <svg
           class="user-icon"
@@ -226,36 +211,29 @@
         <div class="username" aria-label="Username">USERNAME</div>
       </div>
     </header>
-
     <main>
       <section class="features" aria-label="Fitur pengguna">
         <button class="feature-item" aria-label="Dikemas">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-            <path d="M16 7V4a4 4 0 0 0-8 0v3"></path>
-          </svg>
-          Dikemas
+            <path d="M16 7V4a4 4 0 0 0-8 0v3"></path></svg
+          >Dikemas
         </button>
-
         <button class="feature-item" aria-label="Dikirim">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M3 10h11v7H6l-3 3V10z"></path>
             <circle cx="18" cy="17" r="3"></circle>
-            <path d="M18 12v-2a4 4 0 1 0-4 4h2"></path>
-          </svg>
-          Dikirim
+            <path d="M18 12v-2a4 4 0 1 0-4 4h2"></path></svg
+          >Dikirim
         </button>
-
         <button class="feature-item" aria-label="Beri Penilaian">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <polygon
               points="12 2 15 11 22 11 16 15 18 22 12 17 6 22 8 15 2 11 9 11 12 2"
-            ></polygon>
-          </svg>
-          Beri Penilaian
+            ></polygon></svg
+          >Beri Penilaian
         </button>
       </section>
-
       <section aria-label="Gambar produk" class="content-card">
         <img
           src="https://placehold.co/360x300/png?text=Meja+Kecil+Kayu+Modern+Minimalis"
@@ -264,56 +242,45 @@
         />
       </section>
     </main>
-
     <nav class="bottom-nav" role="navigation" aria-label="Navigasi utama">
-      <button aria-label="Beranda" aria-current="false" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <a href="beranda.html" aria-label="Beranda" aria-current="false"
+        ><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M3 9.5 12 3l9 6.5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path>
-          <path d="M9 22V12h6v10"></path>
-        </svg>
-        Beranda
-      </button>
-
-      <button aria-label="Favorit" aria-current="false" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M9 22V12h6v10"></path></svg
+        >Beranda</a
+      >
+      <a href="#" aria-label="Favorit" aria-current="false"
+        ><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path
             d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.72-7.72 1.06-1.06a5.5 5.5 0 0 0 0-7.84z"
-          ></path>
-        </svg>
-        Favorit
-      </button>
-
-      <button aria-label="Pencarian" aria-current="false" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          ></path></svg
+        >Favorit</a
+      >
+      <a href="#" aria-label="Pencarian" aria-current="false"
+        ><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <circle cx="11" cy="11" r="7"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        Pencarian
-      </button>
-
-      <button aria-label="Keranjang" aria-current="false" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg
+        >Pencarian</a
+      >
+      <a href="keranjang.html" aria-label="Keranjang" aria-current="false"
+        ><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <circle cx="9" cy="21" r="1"></circle>
           <circle cx="20" cy="21" r="1"></circle>
           <path
             d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-          ></path>
-        </svg>
-        Keranjang
-      </button>
-
-      <button
+          ></path></svg
+        >Keranjang</a
+      >
+      <a
+        href="profile.html"
         aria-label="Saya"
         aria-current="true"
-        type="button"
         class="active"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        ><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="7" r="4"></circle>
-          <path d="M5.5 21a10 10 0 0 1 13 0"></path>
-        </svg>
-        Saya
-      </button>
+          <path d="M5.5 21a10 10 0 0 1 13 0"></path></svg
+        >Saya</a
+      >
     </nav>
   </body>
 </html>

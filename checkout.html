@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Checkout</title>
     <style>
-      /* Reset and base */
       * {
         box-sizing: border-box;
       }
@@ -32,16 +31,12 @@
         flex-direction: column;
         gap: 1.8rem;
       }
-      /* Title */
       .title {
         font-weight: 700;
         font-size: 1.5rem;
-        /* line-height: 2rem; */
         margin-bottom: 0.3rem;
         color: #2a2a2a;
       }
-
-      /* Form group */
       label {
         display: block;
         font-weight: 600;
@@ -69,8 +64,6 @@
         border-color: #ff7f50;
         background: #fff9f4;
       }
-
-      /* Payment method */
       .payment-method {
         display: flex;
         gap: 1.2rem;
@@ -99,8 +92,6 @@
         color: #ffdec7;
         box-shadow: inset 0 0 14px #ffcda4;
       }
-
-      /* Order section */
       .order {
         background: #fff;
         border-radius: 12px;
@@ -117,7 +108,6 @@
         padding-bottom: 0.3rem;
         color: #4d4234;
       }
-
       .items {
         display: flex;
         flex-direction: column;
@@ -134,7 +124,6 @@
         border-bottom: none;
         padding-bottom: 0;
       }
-
       .item-image {
         width: 80px;
         height: 80px;
@@ -151,7 +140,6 @@
         object-fit: cover;
         display: block;
       }
-
       .item-info {
         flex: 1;
         display: flex;
@@ -170,8 +158,6 @@
         font-size: 0.92rem;
         color: #a0835b;
       }
-
-      /* Order summary */
       .summary {
         margin-top: 1rem;
         border-top: 2px solid #dbc8aa;
@@ -191,14 +177,13 @@
         font-size: 1.05rem;
         color: #5a4d3d;
       }
-
-      /* Buttons container */
       .btn-group {
         display: flex;
         gap: 1rem;
         margin-top: 1.6rem;
       }
-      button {
+      button,
+      .btn-link {
         flex: 1;
         padding: 0.7rem 1rem;
         font-size: 1rem;
@@ -210,8 +195,10 @@
         box-shadow: 0 6px 9px rgb(0 0 0 / 0.08);
         user-select: none;
         text-align: center;
+        text-decoration: none;
       }
-      button:focus-visible {
+      button:focus-visible,
+      .btn-link:focus-visible {
         outline: 3px solid #ffaa66;
         outline-offset: 2px;
       }
@@ -237,8 +224,6 @@
         color: #2b1f18;
         box-shadow: 0 8px 18px rgb(23 17 15 / 0.3);
       }
-
-      /* Responsive adjustments */
       @media (max-width: 350px) {
         .checkout-container {
           max-width: 100%;
@@ -251,7 +236,8 @@
         .btn-group {
           flex-direction: column;
         }
-        button {
+        button,
+        .btn-link {
           width: 100%;
         }
       }
@@ -264,8 +250,7 @@
       aria-label="Checkout form and order summary"
     >
       <h1 class="title">Checkout</h1>
-
-      <form aria-labelledby="checkout-form-label">
+      <form action="pembayaran.html" method="GET" id="checkout-form">
         <div>
           <label for="input-alamat">Alamat</label>
           <input
@@ -278,7 +263,6 @@
             aria-required="true"
           />
         </div>
-
         <div>
           <label for="input-kota">Kota</label>
           <input
@@ -291,7 +275,6 @@
             aria-required="true"
           />
         </div>
-
         <fieldset>
           <legend
             style="
@@ -310,78 +293,93 @@
               name="payment"
               value="credit"
               checked
-            />
-            <label for="pay-credit" class="payment-label" tabindex="0"
+            /><label for="pay-credit" class="payment-label" tabindex="0"
               >Kartu Kredit/Transfer</label
             >
-
             <input
               type="radio"
               id="pay-ewallet"
               name="payment"
               value="ewallet"
-            />
-            <label for="pay-ewallet" class="payment-label" tabindex="0"
+            /><label for="pay-ewallet" class="payment-label" tabindex="0"
               >E Wallet</label
             >
           </div>
         </fieldset>
       </form>
-
       <section class="order" aria-labelledby="order-heading" tabindex="0">
         <h2 class="order-title" id="order-heading">Pesanan</h2>
-
         <div class="items" aria-label="Daftar barang pesanan">
           <article
             class="item"
-            aria-label="Barang 1: Open Key, diproduksi oleh brand furniture, harga Rp.6.037.000"
-          >
-            <div class="item-image" aria-hidden="true">
-              <img
-                src="https://placehold.co/160x160?text=Kasur+Open+Key&font=roboto"
-                alt="Kasur kayu finishing terang bergaya minimalis modern dengan sprei cream dan bantal putih"
-                onerror="this.onerror=null;this.src='https://placehold.co/160x160?text=Image+Not+Found';"
-              />
-            </div>
-            <div class="item-info">
-              <div class="name">Paket Meja dan Kursi</div>
-              <div class="price">Rp.6.037.000</div>
-            </div>
-          </article>
-
-          <article
-            class="item"
-            aria-label="Barang 2: Kursi Kerja hitam ergonomis dengan harga Rp.1.187.000"
+            aria-label="Barang 1: Kursi Kerja, Harga Rp 1.787.000"
           >
             <div class="item-image" aria-hidden="true">
               <img
                 src="https://placehold.co/160x160?text=Kursi+Kerja+Hitam&font=roboto"
-                alt="Kursi kerja ergonomis berwarna hitam dengan armrest dan roda putar di lantai kayu"
+                alt="Kursi kerja ergonomis berwarna hitam"
                 onerror="this.onerror=null;this.src='https://placehold.co/160x160?text=Image+Not+Found';"
               />
             </div>
             <div class="item-info">
               <div class="name">Kursi Kerja</div>
-              <div class="price">Rp.1.187.000</div>
+              <div class="price">Rp.1.787.000</div>
+            </div>
+          </article>
+          <article
+            class="item"
+            aria-label="Barang 2: Sofa Modern, harga Rp.3.590.000"
+          >
+            <div class="item-image" aria-hidden="true">
+              <img
+                src="https://placehold.co/160x160?text=Sofa+Modern&font=roboto"
+                alt="Sofa modern untuk ruang tamu"
+                onerror="this.onerror=null;this.src='https://placehold.co/160x160?text=Image+Not+Found';"
+              />
+            </div>
+            <div class="item-info">
+              <div class="name">Sofa Modern</div>
+              <div class="price">Rp.3.590.000</div>
+            </div>
+          </article>
+          <article
+            class="item"
+            aria-label="Barang 3: Dipan Kayu, harga Rp.800.000"
+          >
+            <div class="item-image" aria-hidden="true">
+              <img
+                src="https://placehold.co/160x160?text=Dipan+Kayu&font=roboto"
+                alt="Dipan kayu alami unggulan"
+                onerror="this.onerror=null;this.src='https://placehold.co/160x160?text=Image+Not+Found';"
+              />
+            </div>
+            <div class="item-info">
+              <div class="name">Dipan Kayu</div>
+              <div class="price">Rp.800.000</div>
             </div>
           </article>
         </div>
-
         <div class="summary" aria-live="polite" aria-atomic="true">
-          <label>Total Item :</label>
-          <span class="value" id="total-items">2</span>
+          <label>Total Item :</label
+          ><span class="value" id="total-items">3</span>
         </div>
         <div class="summary" aria-live="polite" aria-atomic="true">
-          <label>Jumlah Harga :</label>
-          <span class="value" id="total-price">Rp 7.224.000</span>
+          <label>Jumlah Harga :</label
+          ><span class="value" id="total-price">Rp 6.177.000</span>
         </div>
       </section>
-
       <nav class="btn-group" aria-label="Tombol aksi checkout">
-        <button type="button" class="btn-cancel" tabindex="0">
-          Batalkan Pesanan
-        </button>
-        <button type="submit" class="btn-submit" tabindex="0">
+        <a href="keranjang.html" class="btn-link btn-cancel" tabindex="0"
+          >Batalkan Pesanan</a
+        >
+        <button
+          type="submit"
+          form="checkout-form"
+          class="btn-submit"
+          tabindex="0"
+          href="pembayaran.html"
+          aria-label="Lanjutkan ke pembayaran"
+        >
           Lanjut Pembayaran
         </button>
       </nav>
